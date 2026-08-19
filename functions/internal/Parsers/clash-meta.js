@@ -114,7 +114,7 @@ export class ClashMetaParser {
                 eh: Obj["early-data-header-name"],
 
                 // - grpc
-                serviceName: Obj["grpc-service-name"],
+                serviceName: Obj["grpc-service-name"] || (Obj["grpc-opts"] || {})["grpc-service-name"],
 
                 // - http
                 method: Obj.method,
@@ -146,11 +146,12 @@ export class ClashMetaParser {
                 // - http & ws & h2 
                 host: (Obj["ws-headers"] || Obj.headers || {}).Host,
                 // - http & ws & h2 & grpc
-                path: 
-                    Obj["ws-path"] || 
-                    ( Obj["ws-opts"] || Obj["h2-opts"] || {} ).path || 
-                    ( (Obj["http-opts"] || {}).path || [] )[0] || 
+                path:
+                    Obj["ws-path"] ||
+                    ( Obj["ws-opts"] || Obj["h2-opts"] || {} ).path ||
+                    ( (Obj["http-opts"] || {}).path || [] )[0] ||
                     Obj["grpc-service-name"] ||
+                    (Obj["grpc-opts"] || {})["grpc-service-name"] ||
                     undefined,
 
             }
@@ -191,7 +192,7 @@ export class ClashMetaParser {
                 eh: Obj["early-data-header-name"],
 
                 // - grpc
-                serviceName: Obj["grpc-service-name"],
+                serviceName: Obj["grpc-service-name"] || (Obj["grpc-opts"] || {})["grpc-service-name"],
 
                 // - http
                 method: Obj.method,
