@@ -120,8 +120,11 @@ export class ClashMetaParser {
                 method: Obj.method,
 
                 // - http & ws & h2
-                path: Obj["ws-path"] || Obj.path,
-                host: Obj.host || (Obj["ws-headers"] || Obj.headers || {}).Host,
+                path: Obj["ws-path"] || (Obj["ws-opts"] || Obj["h2-opts"] || {}).path || Obj.path,
+                host:
+                    Obj.host ||
+                    (Obj["ws-headers"] || Obj.headers || {}).Host ||
+                    ((Obj["ws-opts"] || Obj["h2-opts"] || Obj["http-opts"] || {}).headers || {}).Host,
             }
         }
     }
@@ -143,8 +146,10 @@ export class ClashMetaParser {
                 sni: Obj.servername,
 
                 // transport layer config
-                // - http & ws & h2 
-                host: (Obj["ws-headers"] || Obj.headers || {}).Host,
+                // - http & ws & h2
+                host:
+                    (Obj["ws-headers"] || Obj.headers || {}).Host ||
+                    ((Obj["ws-opts"] || Obj["h2-opts"] || Obj["http-opts"] || {}).headers || {}).Host,
                 // - http & ws & h2 & grpc
                 path:
                     Obj["ws-path"] ||
@@ -198,8 +203,10 @@ export class ClashMetaParser {
                 method: Obj.method,
 
                 // - http & ws
-                path: Obj["ws-path"] || Obj.path,
-                host: (Obj["ws-headers"] || Obj.headers || {}).Host,
+                path: Obj["ws-path"] || (Obj["ws-opts"] || Obj["h2-opts"] || {}).path || Obj.path,
+                host:
+                    (Obj["ws-headers"] || Obj.headers || {}).Host ||
+                    ((Obj["ws-opts"] || Obj["h2-opts"] || Obj["http-opts"] || {}).headers || {}).Host,
             }
         }
     }
