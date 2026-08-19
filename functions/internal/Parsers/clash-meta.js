@@ -58,8 +58,9 @@ export class ClashMetaParser {
             Port: Obj.port,
             Auth: Obj.auth || Obj.password,
             Query: {
-                objs: Obj.obfs,
+                obfs: Obj.obfs,
                 "obfs-password": Obj["obfs-password"],
+                sni: Obj.sni,
                 insecure: Obj["skip-cert-verify"] ? 1 : 0,
                 mport: Obj.ports,
             }

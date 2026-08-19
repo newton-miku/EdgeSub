@@ -152,7 +152,8 @@ export default class Dumper {
             
             "client-fingerprint": VMESS.Query.fp,
 
-            alpn: ["h2", "http/1.1"],
+            // TLS-only; alpn on a non-TLS (tls:false) node is invalid in mihomo
+            alpn: (VMESS.Query.tls === "tls") ? ["h2", "http/1.1"] : undefined,
 
             // tls
             tls: VMESS.Query.tls === "tls",
