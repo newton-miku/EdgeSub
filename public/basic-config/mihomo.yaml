@@ -18,9 +18,11 @@ dns:
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - '*'
-    - '.lan'
-    - lancache.steamcontent.com
+    - '*.lan'
+    - '*.local'
+    - '*.localhost'
+    - '*.test'
+    - 'lancache.steamcontent.com'
   default-nameserver:
     - 119.29.29.29
     - 223.5.5.5
@@ -31,8 +33,10 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
   fallback:
-    - https://dns.google/dns-query
-    - https://cloudflare-dns.com/dns-query
+    - tls://1.1.1.1:853
+    - tls://8.8.8.8:853
+    - 119.29.29.29
+    - 223.5.5.5
   fallback-filter:
     geoip: true
     geoip-code: CN
